@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>메인 화면</title>
+  <style>
+    .display-info {
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    .status {
+      margin: 20px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .status.open {
+      background-color: #e6ffe6;
+      color: #006600;
+    }
+
+    .status.closed {
+      background-color: #ffe6e6;
+      color: #660000;
+    }
+
+    .control-panel {
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.open {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button.close {
+      background-color: #f44336;
+      color: white;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>메인 화면</h1>
+
+  <div class="control-panel">
+    <h2>확장 화면 제어</h2>
+    <button id="openExtBtn" class="open">확장 화면 열기</button>
+    <button id="closeExtBtn" class="close" disabled>확장 화면 닫기</button>
+  </div>
+
+  <div id="status" class="status closed">
+    <h3>확장 화면 상태</h3>
+    <p>상태: <span id="windowStatus">닫힘</span></p>
+    <p>표시 위치: <span id="displayLocation">없음</span></p>
+  </div>
+
+  <div id="displays" class="display-info">
+    <h3>연결된 디스플레이:</h3>
+    연결된 디스플레이 정보를 불러오는 중...
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron')
+
+    const openExtBtn = document.getElementById('openExtBtn')
+    const closeExtBtn = document.getElementById('closeExtBtn')
+    const statusDiv = document.getElementById('status')
+    const windowStatus = document.getElementById('windowStatus')
+    const displayLocation = document.getElementById('displayLocation')
+
+    async function updateDisplayInfo() {
+      const displays = await ipcRenderer.invoke('get-displays')
+      const displaysDiv = document.getElementById('displays')
+      displaysDiv.innerHTML = '<h3>연결된 디스플레이:</h3>'
+
+      displays.forEach(display => {
+        displaysDiv.innerHTML += `
+                    <div>
+                        <p>디스플레이: ${display.name}</p>
+                        <p>해상도: ${display.bounds.width} x ${display.bounds.height}</p>
+                        <p>위치: (${display.bounds.x}, ${display.bounds.y})</p>
+                        <p>주 디스플레이: ${display.isPrimary ? '예' : '아니오'}</p>
+                    </div>
+                    <hr>
+                `
+      })
+    }
+
+    function updateStatusDisplay(status) {
+      const isOpen = status.isOpen
+      windowStatus.textContent = isOpen ? '열림' : '닫힘'
+      displayLocation.textContent = isOpen ?
+        (status.display === 'external' ? '외부 디스플레이' : '주 디스플레이') :
+        '없음'
+
+      statusDiv.className = `status ${isOpen ? 'open' : 'closed'}`
+      openExtBtn.disabled = isOpen
+      closeExtBtn.disabled = !isOpen
+    }
+
+    // 페이지 로드시 초기화
+    document.addEventListener('DOMContentLoaded', () => {
+      updateDisplayInfo()
+      // 초기 상태는 닫힘으로 설정
+      updateStatusDisplay({ isOpen: false, display: null })
+    })
+
+    openExtBtn.addEventListener('click', () => {
+      ipcRenderer.send('open-ext-window')
+    })
+
+    closeExtBtn.addEventListener('click', () => {
+      ipcRenderer.send('close-ext-window')
+    })
+
+    // 상태 업데이트 이벤트 리스너
+    ipcRenderer.on('ext-window-status', (event, status) => {
+      updateStatusDisplay(status)
+    })
+  </script>
+</body>
+
+</html>
