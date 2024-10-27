@@ -1,0 +1,13 @@
+{
+  "tauri": {
+    "updater": {
+      "active": true,
+      "dialog": false,
+      "pubkey": "",
+      "endpoints": ["http://localhost:8080/update.json"]
+    },
+    "security": {
+      "csp": null
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.1",
+  "notes": "자동 업데이트 테스트",
+  "pub_date": "2024-10-27T13:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "url": "https://your-update-server.com/releases/YourApp-1.0.1.msi"
+    },
+    "darwin-x86_64": {
+      "url": "https://your-update-server.com/releases/YourApp-1.0.1.app.tar.gz"
+    }
+  }
+}
