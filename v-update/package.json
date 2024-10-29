@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri dev"
+    "tauri": "tauri dev",
+    "tauri:build": "tauri build -t universal-apple-darwin"
   },
   "dependencies": {
     "react": "^18.2.0",
