@@ -16,6 +16,23 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "dialog": {
+        "all": false,
+        "open": true
+      },
+      "fs": {
+        "all": false,
+        "readDir": true,
+        "createDir": true
+      },
+      "path": {
+        "all": true
+      },
+      "process": {
+        "all": false,
+        "exit": true,
+        "relaunch": true
       }
     },
     "windows": [
@@ -30,9 +47,13 @@
     },
     "updater": {
       "active": true,
-      "endpoints": ["https://127.0.0.1:8080/update.json"],
+      "endpoints": ["https://jl917fc.netlify.app/update.json"],
       "dialog": false,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNEQzAwMDlGNDYwMzFGREQKUldUZEh3Tkdud0RBUFErb2o1dENnaHI5dk1GbXV2dWFlTUhrZSt1MzFSM2FXdmtPeHVTOGNDWW4K"
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDY4Rjk5REM1RTEzMjc5OTEKUldTUmVUTGh4WjM1YURaY3NQckttM2RkdENCVEJrbFFXeE1vdXcvRGduNnA0dzV5Z3dDdVJWbEMK",
+      "windows": {
+        "installMode": "passive",
+        "installerArgs": []
+      }
     },
     "bundle": {
       "active": true,

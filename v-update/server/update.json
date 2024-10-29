@@ -1,26 +1,10 @@
 {
-  "name": "v0.1.9",
+  "name": "v0.2.0",
   "pub_date": "2023-03-06T02:57:43.253Z",
   "platforms": {
-    "win64": {
-      "signature": "",
-      "url": "https://github.com/lzdyes/douyin-downloader/releases/download/v0.1.9/douyin-downloader_0.1.9_x64_en-US.msi.zip"
-    },
-    "linux": {
-      "signature": "",
-      "url": "https://github.com/lzdyes/douyin-downloader/releases/download/v0.1.9/douyin-downloader_0.1.9_amd64.AppImage.tar.gz"
-    },
     "darwin-aarch64": {
       "signature": "",
-      "url": "https://github.com/lzdyes/douyin-downloader/releases/download/v0.1.9/douyin-downloader.app.tar.gz"
-    },
-    "linux-x86_64": {
-      "signature": "",
-      "url": "https://github.com/lzdyes/douyin-downloader/releases/download/v0.1.9/douyin-downloader_0.1.9_amd64.AppImage.tar.gz"
-    },
-    "windows-x86_64": {
-      "signature": "",
-      "url": "https://github.com/lzdyes/douyin-downloader/releases/download/v0.1.9/douyin-downloader_0.1.9_x64_en-US.msi.zip"
+      "url": "https://github.com/jl917/rele3/releases/download/v1.12.10/v-update.app.tar.gz"
     }
   }
 }
